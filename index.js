@@ -143,6 +143,12 @@ exports.decorateTerm = function (Term, { React }) {
     }
 
     getAbsoluteUrl (url) {
+      if (/^chrome-devtools:\/\//.test(url)) {
+        return url.replace(
+          /^chrome-devtools:\/\/devtools\/remote\//,
+          'https://chrome-devtools-frontend.appspot.com/'
+        );
+      }
       if (/^[a-z]+:\/\//.test(url)) return url;
       if (0 === url.indexOf('//')) return `http${url}`
       if (emailRe.test(url)) return `mailto:${url}`;
